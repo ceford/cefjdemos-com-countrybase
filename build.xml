@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="countrybase" basedir="." default="main">
+
+    <!-- Source and Destinations -->
+
+    <property name="srcdir" value="./com_countrybase" override="true" />
+    <property name="sitedir" value="/Users/ceford/Sites/jdm4"  override="true" />
+    <property name="zipsdir" value="/Users/ceford/git/zips/cefjdemos"  override="true" />
+
+    <!-- Filesets -->
+
+    <fileset dir="${srcdir}/admin" id="adminfiles">
+        <include name="**" />
+    </fileset>
+    <fileset dir="${srcdir}/media" id="mediafiles">
+        <include name="**" />
+    </fileset>
+    <fileset dir="${srcdir}/site" id="sitefiles">
+        <include name="**" />
+    </fileset>
+    <fileset dir="${srcdir}" id="allfiles">
+        <include name="**" />
+    </fileset>
+
+    <!-- Targets -->
+
+    <target name="main" description="main target">
+        <copy todir="${sitedir}/administrator/components/com_countrybase">
+            <fileset refid="adminfiles" />
+        </copy>
+        <copy todir="${sitedir}/media/com_countrybase">
+            <fileset refid="mediafiles" />
+        </copy>
+        <copy todir="${sitedir}/components/com_countrybase">
+            <fileset refid="sitefiles" />
+        </copy>
+        <zip destfile="${zipsdir}/com_countrybase.zip">
+            <fileset refid="allfiles" />
+        </zip>
+    </target>
+</project>

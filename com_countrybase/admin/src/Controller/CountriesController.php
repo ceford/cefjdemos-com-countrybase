@@ -5,7 +5,7 @@
  * @subpackage  com_countrybase
  *
  * @copyright   (C) 2025 Clifford E Ford
- * @license     GNU General Public License version 2 or later; see LICENSE.txt
+ * @license     GNU General Public License version 3 or later; see LICENSE.txt
  */
 
 namespace Cefjdemos\Component\Countrybase\Administrator\Controller;
@@ -15,18 +15,14 @@ namespace Cefjdemos\Component\Countrybase\Administrator\Controller;
 // phpcs:enable PSR1.Files.SideEffects
 
 use Joomla\CMS\Application\CMSApplication;
-use Joomla\CMS\Language\Text;
 use Joomla\CMS\MVC\Controller\AdminController;
 use Joomla\CMS\MVC\Factory\MVCFactoryInterface;
-use Joomla\CMS\Response\JsonResponse;
-use Joomla\CMS\Router\Route;
 use Joomla\Input\Input;
-use Joomla\Utilities\ArrayHelper;
 
 /**
  * Countries list controller class.
  *
- * @since  1.6
+ * @since  1.0.0
  */
 class CountriesController extends AdminController
 {
@@ -40,7 +36,6 @@ class CountriesController extends AdminController
      * @param   CMSApplication       $app      The Application for the dispatcher
      * @param   Input                $input    Input
      *
-     * @since   3.0
      */
     public function __construct($config = array(), MVCFactoryInterface $factory = null, $app = null, $input = null)
     {
@@ -55,8 +50,6 @@ class CountriesController extends AdminController
      * @param   array   $config  The array of possible config values. Optional.
      *
      * @return  \Joomla\CMS\MVC\Model\BaseDatabaseModel
-     *
-     * @since   1.6
      */
     public function getModel($name = 'Country', $prefix = 'Administrator', $config = array('ignore_request' => true))
     {

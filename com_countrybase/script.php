@@ -5,7 +5,7 @@
  * @subpackage  com_countrybase
  *
  * @copyright   (C) 2025 Clifford E Ford
- * @license     GNU General Public License version 2 or later; see LICENSE.txt
+ * @license     GNU General Public License version 3 or later; see LICENSE.txt
  */
 
 use Joomla\CMS\Application\AdministratorApplication;

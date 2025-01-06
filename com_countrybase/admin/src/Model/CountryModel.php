@@ -5,7 +5,7 @@
  * @subpackage  com_countrybase
  *
  * @copyright   (C) 2025 Clifford E Ford
- * @license     GNU General Public License version 2 or later; see LICENSE.txt
+ * @license     GNU General Public License version 3 or later; see LICENSE.txt
  */
 
 namespace Cefjdemos\Component\Countrybase\Administrator\Model;
@@ -15,38 +15,15 @@ namespace Cefjdemos\Component\Countrybase\Administrator\Model;
 // phpcs:enable PSR1.Files.SideEffects
 
 
-use Joomla\CMS\Date\Date;
-use Joomla\CMS\Event\AbstractEvent;
 use Joomla\CMS\Factory;
-use Joomla\CMS\Filter\InputFilter;
-use Joomla\CMS\Filter\OutputFilter;
 use Joomla\CMS\Form\Form;
-use Joomla\CMS\Form\FormFactoryInterface;
-use Joomla\CMS\Helper\TagsHelper;
-use Joomla\CMS\Language\Associations;
-use Joomla\CMS\Language\LanguageHelper;
 use Joomla\CMS\Language\Text;
-use Joomla\CMS\MVC\Factory\MVCFactoryInterface;
 use Joomla\CMS\MVC\Model\AdminModel;
-use Joomla\CMS\MVC\Model\WorkflowBehaviorTrait;
-use Joomla\CMS\MVC\Model\WorkflowModelInterface;
-use Joomla\CMS\Plugin\PluginHelper;
-use Joomla\CMS\String\PunycodeHelper;
-use Joomla\CMS\Table\TableInterface;
-use Joomla\CMS\Tag\TaggableTableInterface;
-use Joomla\CMS\UCM\UCMType;
-use Joomla\CMS\Versioning\VersionableModelTrait;
-use Joomla\CMS\Workflow\Workflow;
-use Joomla\Component\Categories\Administrator\Helper\CategoriesHelper;
-use Joomla\Component\Fields\Administrator\Helper\FieldsHelper;
-use Joomla\Database\ParameterType;
-use Joomla\Registry\Registry;
-use Joomla\Utilities\ArrayHelper;
 
 /**
  * Item Model for a Country.
  *
- * @since  1.6
+ * @since  1.0.0
  */
 
 class CountryModel extends AdminModel
@@ -55,7 +32,6 @@ class CountryModel extends AdminModel
      * The prefix to use with controller messages.
      *
      * @var    string
-     * @since  1.6
      */
     protected $text_prefix = 'COM_COUNTRYBASE_COUNTRY';
 
@@ -66,16 +42,17 @@ class CountryModel extends AdminModel
      * @param   boolean  $loadData  True if the form is to load its own data (default case), false if not.
      *
      * @return  Form|boolean  A Form object on success, false on failure
-     *
-     * @since   1.6
      */
     public function getForm($data = array(), $loadData = true)
     {
         // Get the form.
-        $form = $this->loadForm('com_countrybase.country', 'country', array('control' => 'jform', 'load_data' => $loadData));
+        $form = $this->loadForm(
+            'com_countrybase.country',
+            'country',
+            array('control' => 'jform', 'load_data' => $loadData)
+        );
 
-        if (empty($form))
-        {
+        if (empty($form)) {
             return false;
         }
 
@@ -86,8 +63,6 @@ class CountryModel extends AdminModel
      * Method to get the data that should be injected in the form.
      *
      * @return  mixed  The data for the form.
-     *
-     * @since   1.6
      */
     protected function loadFormData()
     {
@@ -95,10 +70,8 @@ class CountryModel extends AdminModel
         $app = Factory::getApplication();
         $data = $app->getUserState('com_countrybase.edit.country.data', array());
 
-        if (empty($data))
-        {
+        if (empty($data)) {
             $data = $this->getItem();
-
         }
 
         return $data;
@@ -113,7 +86,6 @@ class CountryModel extends AdminModel
      *
      * @return  Table  A Table object
      *
-     * @since   3.0
      * @throws  \Exception
      */
     public function getTable($name = '', $prefix = '', $options = array())
@@ -121,8 +93,7 @@ class CountryModel extends AdminModel
         $name = 'Countries';
         $prefix = 'Table';
 
-        if ($table = $this->_createTable($name, $prefix, $options))
-        {
+        if ($table = $this->_createTable($name, $prefix, $options)) {
             return $table;
         }
 

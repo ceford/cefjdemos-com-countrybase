@@ -5,7 +5,7 @@
  * @subpackage  com_countrybase
  *
  * @copyright   (C) 2025 Clifford E Ford
- * @license     GNU General Public License version 2 or later; see LICENSE.txt
+ * @license     GNU General Public License version 3 or later; see LICENSE.txt
  */
 
 // phpcs:disable PSR1.Files.SideEffects
@@ -23,7 +23,8 @@ $listDirn  = $this->escape($this->state->get('list.direction'));
 ?>
 <h1><?php echo Text::_('COM_COUNTRYBASE_COUNTRIES'); ?></h1>
 
-<form action="<?php echo Route::_('index.php?option=com_countrybase'); ?>" method="post" name="adminForm" id="adminForm">
+<form action="<?php echo Route::_('index.php?option=com_countrybase'); ?>"
+    method="post" name="adminForm" id="adminForm">
 
 <?php echo LayoutHelper::render('joomla.searchtools.default', array('view' => $this)); ?>
 
@@ -33,7 +34,13 @@ $listDirn  = $this->escape($this->state->get('list.direction'));
     <thead>
     <tr>
         <th scope="col">
-            <?php echo HTMLHelper::_('searchtools.sort', 'COM_COUNTRYBASE_COUNTRIES_COUNTRY', 'a.title', $listDirn, $listOrder); ?>
+            <?php echo HTMLHelper::_(
+                'searchtools.sort',
+                'COM_COUNTRYBASE_COUNTRIES_COUNTRY',
+                'a.title',
+                $listDirn,
+                $listOrder
+            ); ?>
         </th>
         <th scope="col"><?php echo Text::_('COM_COUNTRYBASE_COUNTRIES_ISO_2'); ?></th>
         <th scope="col"><?php echo Text::_('COM_COUNTRYBASE_COUNTRIES_ISO_3'); ?></th>

@@ -5,7 +5,7 @@
  * @subpackage  com_countrybase
  *
  * @copyright   (C) 2025 Clifford E Ford
- * @license     GNU General Public License version 2 or later; see LICENSE.txt
+ * @license     GNU General Public License version 3 or later; see LICENSE.txt
  */
 
 \defined('_JEXEC') or die('Restricted access');
@@ -43,7 +43,13 @@ $user = Factory::getApplication()->getIdentity();
                         <?php echo HTMLHelper::_('searchtools.sort', 'JSTATUS', 'a.state', $listDirn, $listOrder); ?>
                     </th>
                     <th scope="col">
-                        <?php echo HTMLHelper::_('searchtools.sort', 'COM_COUNTRYBASE_COUNTRIES_COUNTRY', 'a.title', $listDirn, $listOrder); ?>
+                        <?php echo HTMLHelper::_(
+                            'searchtools.sort',
+                            'COM_COUNTRYBASE_COUNTRIES_COUNTRY',
+                            'a.title',
+                            $listDirn,
+                            $listOrder
+                        ); ?>
                     </th>
                     <th scope="col">
                         <?php echo Text::_('COM_COUNTRYBASE_COUNTRIES_ISO_2'); ?>
@@ -63,7 +69,7 @@ $user = Factory::getApplication()->getIdentity();
                 </tr>
             </thead>
             <tbody>
-                <?php foreach ($this->items as $i => $item):
+                <?php foreach ($this->items as $i => $item) :
                     $canChange = $user->authorise('core.edit.state', 'com_cuntrybase.country.' . $item->id);
                     ?>
                     <tr>
@@ -78,13 +84,14 @@ $user = Factory::getApplication()->getIdentity();
                                 'id' => 'state-' . $item->id
                             ];
 
-                            echo (new PublishedButton)->render((int) $item->state, $i, $options);
+                            echo (new PublishedButton())->render((int) $item->state, $i, $options);
                             ?>
                         </td>
                         <td>
-                            <a href="<?php echo Route::_('index.php?option=com_countrybase&task=country.edit&id=' . $item->id); ?>"
-                                title="<?php echo Text::_('JACTION_EDIT'); ?> <?php echo $this->escape($item->title); ?>">
-                                <?php echo $this->escape($item->title); ?></a>
+                            <a href="<?php echo Route::_('index.php?option=com_countrybase&task=country.edit&id=' .
+                            $item->id); ?>"
+                            title="<?php echo Text::_('JACTION_EDIT'); ?> <?php echo $this->escape($item->title); ?>">
+                            <?php echo $this->escape($item->title); ?></a>
                         </td>
                         <td>
                             <?php echo $item->iso_2; ?>

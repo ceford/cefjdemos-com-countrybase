@@ -5,12 +5,14 @@
  * @subpackage  com_countrybase
  *
  * @copyright   (C) 2025 Clifford E Ford
- * @license     GNU General Public License version 2 or later; see LICENSE.txt
+ * @license     GNU General Public License version 3 or later; see LICENSE.txt
  */
 
 namespace Cefjdemos\Component\Countrybase\Administrator\View\Currency;
 
-defined('_JEXEC') or die;
+// phpcs:disable PSR1.Files.SideEffects
+\defined('_JEXEC') or die;
+// phpcs:enable PSR1.Files.SideEffects
 
 use Joomla\CMS\Factory;
 use Joomla\CMS\Helper\ContentHelper;
@@ -23,7 +25,7 @@ use Joomla\CMS\Toolbar\ToolbarHelper;
 /**
  * View to edit a country.
  *
- * @since  1.6
+ * @since  1.0.0
  */
 class HtmlView extends BaseHtmlView
 {
@@ -63,7 +65,6 @@ class HtmlView extends BaseHtmlView
      * @return  mixed  A string if successful, otherwise an Error object.
      *
      * @throws \Exception
-     * @since   1.6
      */
     public function display($tpl = null)
     {
@@ -71,8 +72,7 @@ class HtmlView extends BaseHtmlView
         $this->item  = $this->get('Item');
         $this->state = $this->get('State');
 
-        if (count($errors = $this->get('Errors')))
-        {
+        if (count($errors = $this->get('Errors'))) {
             throw new GenericDataException(implode("\n", $errors), 500);
         }
 
@@ -87,7 +87,6 @@ class HtmlView extends BaseHtmlView
      * @return  void
      *
      * @throws \Exception
-     * @since   1.6
      */
     protected function addToolbar()
     {
@@ -102,18 +101,13 @@ class HtmlView extends BaseHtmlView
             Text::_('COM_COUNTRYBASE_CURRENCY_PAGE_TITLE_' . ($isNew ? 'ADD' : 'EDIT'))
         );
 
-        if ($canDo->get('core.create'))
-        {
-            if ($isNew)
-            {
+        if ($canDo->get('core.create')) {
+            if ($isNew) {
                 $toolbar->apply('currency.save');
-            }
-            else
-            {
+            } else {
                 $toolbar->apply('currency.apply');
             }
             $toolbar->save('currency.save');
-
         }
         $toolbar->cancel('currency.cancel', 'JTOOLBAR_CLOSE');
 

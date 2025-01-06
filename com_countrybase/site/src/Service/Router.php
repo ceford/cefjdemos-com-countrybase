@@ -5,62 +5,42 @@
  * @subpackage  com_countrybase
  *
  * @copyright   (C) 2025 Clifford E Ford
- * @license     GNU General Public License version 2 or later; see LICENSE.txt
+ * @license     GNU General Public License version 3 or later; see LICENSE.txt
  */
 
 namespace Cefjdemos\Component\Countrybase\Site\Service;
 
-defined('_JEXEC') or die;
+// phpcs:disable PSR1.Files.SideEffects
+\defined('_JEXEC') or die;
+// phpcs:enable PSR1.Files.SideEffects
 
 use Joomla\CMS\Application\SiteApplication;
-use Joomla\CMS\Categories\CategoryFactoryInterface;
-use Joomla\CMS\Component\ComponentHelper;
 use Joomla\CMS\Component\Router\RouterView;
 use Joomla\CMS\Component\Router\RouterViewConfiguration;
 use Joomla\CMS\Component\Router\Rules\MenuRules;
 use Joomla\CMS\Component\Router\Rules\NomenuRules;
 use Joomla\CMS\Component\Router\Rules\StandardRules;
 use Joomla\CMS\Menu\AbstractMenu;
-use Joomla\Database\DatabaseInterface;
 
 /**
  * Routing class of com_countrybase
  *
- * @since  3.3
+ * @since  1.0.0
  */
 class Router extends RouterView
 {
     protected $noIDs = false;
 
     /**
-     * The category factory
-     *
-     * @var CategoryFactoryInterface
-     *
-     * @since  4.0.0
-     */
-    private $categoryFactory;
-
-    /**
-     * The db
-     *
-     * @var DatabaseInterface
-     *
-     * @since  4.0.0
-     */
-    private $db;
-
-    /**
      * Countrybase Component router constructor
      *
      * @param   SiteApplication           $app              The application object
      * @param   AbstractMenu              $menu             The menu object to work with
-     * @param   CategoryFactoryInterface  $categoryFactory  The category object
-     * @param   DatabaseInterface         $db               The database object
      */
-    public function __construct(SiteApplication $app, AbstractMenu $menu,
-            CategoryFactoryInterface $categoryFactory, DatabaseInterface $db)
-    {
+    public function __construct(
+        SiteApplication $app,
+        AbstractMenu $menu
+    ) {
 
         $countries = new RouterViewConfiguration('countries');
         $countries->setKey('id');

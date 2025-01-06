@@ -6,8 +6,8 @@
     <authorUrl>jdocmanual.org</authorUrl>
     <creationDate>2025-01-02</creationDate>
     <copyright>(C) 2025 Clifford E Ford</copyright>
-    <license>GNU General Public License version 2 or later</license>
-    <version>0.0.1</version>
+    <license>GNU General Public License version 3 or later</license>
+    <version>0.1.0</version>
     <description>COM_COUNTRYBASE_DESCRIPTION</description>
     <namespace path="src">Cefjdemos\Component\Countrybase</namespace>
 
@@ -78,6 +78,6 @@
     <changelogurl>https://raw.githubusercontent.com/ceford/cefjdemos-com-countrybase/master/changelog.xml</changelogurl>
     <updateservers>
         <!-- Note: No spaces or linebreaks allowed between the server tags -->
-        <server type="extension" name="Countrybase Update Site">https://raw.githubusercontent.com/ceford/cefjdemos-com-countrybase/master/countrybase.xml</server>
+        <server type="extension" name="Countrybase Update Site">https://raw.githubusercontent.com/ceford/cefjdemos-com-countrybase/master/updates.xml</server>
     </updateservers>
 </extension>

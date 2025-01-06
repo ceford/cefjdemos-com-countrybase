@@ -5,7 +5,7 @@
  * @subpackage  com_countrybase
  *
  * @copyright   (C) 2025 Clifford E Ford
- * @license     GNU General Public License version 2 or later; see LICENSE.txt
+ * @license     GNU General Public License version 3 or later; see LICENSE.txt
  */
 
 namespace Cefjdemos\Component\Countrybase\Administrator\View\Countries;
@@ -15,7 +15,6 @@ namespace Cefjdemos\Component\Countrybase\Administrator\View\Countries;
 // phpcs:enable PSR1.Files.SideEffects
 
 use Joomla\CMS\Factory;
-use Joomla\CMS\Layout\FileLayout;
 use Joomla\CMS\Language\Text;
 use Joomla\CMS\MVC\View\GenericDataException;
 use Joomla\CMS\MVC\View\HtmlView as BaseHtmlView;
@@ -25,7 +24,7 @@ use Joomla\CMS\Toolbar\ToolbarHelper;
 /**
  * View class for countrybase.
  *
- * @since  4.0
+ * @since  1.0.0
  */
 class HtmlView extends BaseHtmlView
 {
@@ -33,7 +32,6 @@ class HtmlView extends BaseHtmlView
      * The search tools form
      *
      * @var    Form
-     * @since  1.6
      */
     public $filterForm;
 
@@ -41,23 +39,13 @@ class HtmlView extends BaseHtmlView
      * The active search filters
      *
      * @var    array
-     * @since  1.6
      */
     public $activeFilters = [];
-
-    /**
-     * Category data
-     *
-     * @var    array
-     * @since  1.6
-     */
-    protected $categories = [];
 
     /**
      * An array of items
      *
      * @var    array
-     * @since  1.6
      */
     protected $items = [];
 
@@ -65,7 +53,6 @@ class HtmlView extends BaseHtmlView
      * The pagination object
      *
      * @var    Pagination
-     * @since  1.6
      */
     protected $pagination;
 
@@ -73,7 +60,6 @@ class HtmlView extends BaseHtmlView
      * The model state
      *
      * @var    Registry
-     * @since  1.6
      */
     protected $state;
 
@@ -84,7 +70,6 @@ class HtmlView extends BaseHtmlView
      *
      * @return  void
      *
-     * @since   1.6
      * @throws  Exception
      */
     public function display($tpl = null): void
@@ -110,8 +95,6 @@ class HtmlView extends BaseHtmlView
      * Add the page title and toolbar.
      *
      * @return  void
-     *
-     * @since   1.6
      */
     protected function addToolbar(): void
     {

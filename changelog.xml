@@ -2,6 +2,14 @@
     <changelog>
         <element>com_countrybase</element>
         <type>component</type>
+        <version>0.1.0</version>
+        <remove>
+            <item>All references to category and database.</item>
+        </remove>
+    </changelog>
+    <changelog>
+        <element>com_countrybase</element>
+        <type>component</type>
         <version>0.0.1</version>
         <addition>
             <item>Added this changelog!</item>

@@ -5,14 +5,15 @@
  * @subpackage  com_countrybase
  *
  * @copyright   (C) 2025 Clifford E Ford
- * @license     GNU General Public License version 2 or later; see LICENSE.txt
+ * @license     GNU General Public License version 3 or later; see LICENSE.txt
  */
 
 namespace Cefjdemos\Component\Countrybase\Administrator\Model;
 
-defined('_JEXEC') or die;
+// phpcs:disable PSR1.Files.SideEffects
+\defined('_JEXEC') or die;
+// phpcs:enable PSR1.Files.SideEffects
 
-use Joomla\CMS\Component\ComponentHelper;
 use Joomla\CMS\Factory;
 use Joomla\CMS\MVC\Model\ListModel;
 use Joomla\Database\ParameterType;
@@ -20,7 +21,7 @@ use Joomla\Database\ParameterType;
 /**
  * Methods to handle a list of records.
  *
- * @since  1.6
+ * @since  1.0.0
  */
 class CurrenciesModel extends ListModel
 {
@@ -28,9 +29,6 @@ class CurrenciesModel extends ListModel
      * Constructor.
      *
      * @param   array  $config  An optional associative array of configuration settings.
-     *
-     * @see     \JController
-     * @since   1.6
      */
     public function __construct($config = array())
     {
@@ -69,8 +67,6 @@ class CurrenciesModel extends ListModel
      * @param   string  $direction  An optional direction (asc|desc).
      *
      * @return  void
-     *
-     * @since   3.0.1
      */
     protected function populateState($ordering = 'title', $direction = 'ASC')
     {
@@ -100,8 +96,6 @@ class CurrenciesModel extends ListModel
      * @param   string  $id  A prefix for the store id.
      *
      * @return  string  A store id.
-     *
-     * @since   1.6
      */
     protected function getStoreId($id = '')
     {
@@ -117,8 +111,6 @@ class CurrenciesModel extends ListModel
      * Get the master query for retrieving a list of currencies subject to the model state.
      *
      * @return  \Joomla\Database\DatabaseQuery
-     *
-     * @since   1.6
      */
     protected function getListQuery()
     {
@@ -147,8 +139,9 @@ class CurrenciesModel extends ListModel
         $search = $this->getState('filter.search');
 
         if (!empty($search)) {
-            $search = $db->quote('%' . str_replace(' ', '%', $db->escape(trim($search), true) . '%'));
-            $query->where('(a.title LIKE ' . $search . ')');
+            $search = '%' . str_replace(' ', '%', trim($search) . '%');
+            $query->where($db->quoteName('a.title') . ' LIKE :search')
+            ->bind(':search', $search, ParameterType::STRING);
         }
 
         // Filter by published state

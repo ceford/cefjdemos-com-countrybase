@@ -5,7 +5,7 @@
  * @subpackage  com_countrybase
  *
  * @copyright   (C) 2025 Clifford E Ford
- * @license     GNU General Public License version 2 or later; see LICENSE.txt
+ * @license     GNU General Public License version 3 or later; see LICENSE.txt
  */
 
 \defined('_JEXEC') or die('Restricted access');
@@ -24,7 +24,8 @@ $user      = Factory::getApplication()->getIdentity();
 
 ?>
 
-<form action="<?php echo Route::_('index.php?option=com_countrybase&view=currencies'); ?>" method="post" name="adminForm" id="adminForm">
+<form action="<?php echo Route::_('index.php?option=com_countrybase&view=currencies'); ?>"
+    method="post" name="adminForm" id="adminForm">
 
 <?php echo LayoutHelper::render('joomla.searchtools.default', array('view' => $this)); ?>
 
@@ -40,7 +41,13 @@ $user      = Factory::getApplication()->getIdentity();
             <?php echo HTMLHelper::_('searchtools.sort', 'JSTATUS', 'a.state', $listDirn, $listOrder); ?>
         </th>
         <th scope="col">
-            <?php echo HTMLHelper::_('searchtools.sort', 'COM_COUNTRYBASE_CURRENCIES_CURRENCY', 'a.title', $listDirn, $listOrder); ?>
+            <?php echo HTMLHelper::_(
+                'searchtools.sort',
+                'COM_COUNTRYBASE_CURRENCIES_CURRENCY',
+                'a.title',
+                $listDirn,
+                $listOrder
+            ); ?>
         </th>
         <th scope="col"><?php echo Text::_('COM_COUNTRYBASE_CURRENCIES_CODE'); ?></th>
         <th scope="col"><?php echo Text::_('COM_COUNTRYBASE_CURRENCIES_SYMBOL'); ?></th>
@@ -51,7 +58,7 @@ $user      = Factory::getApplication()->getIdentity();
     <tbody>
     <?php foreach ($this->items as $i => $item) :
         $canChange = $user->authorise('core.edit.state', 'com_countrybase.currency.' . $item->id);
-    ?>
+        ?>
     <tr>
         <td class="text-center">
             <?php echo HTMLHelper::_('grid.id', $i, $item->id, false, 'cid', 'cb', $item->title); ?>
@@ -64,8 +71,8 @@ $user      = Factory::getApplication()->getIdentity();
                     'id' => 'state-' . $item->id
                 ];
 
-                echo (new PublishedButton)->render((int) $item->state, $i, $options);
-            ?>
+                echo (new PublishedButton())->render((int) $item->state, $i, $options);
+                ?>
         </td>
         <td>
             <a href="<?php echo Route::_('index.php?option=com_countrybase&task=currency.edit&id=' . $item->id); ?>"

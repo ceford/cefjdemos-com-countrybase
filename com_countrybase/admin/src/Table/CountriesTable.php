@@ -5,7 +5,7 @@
  * @subpackage  com_ffmap
  *
  * @copyright   (C) 2021 Clifford E Ford
- * @license     GNU General Public License version 2 or later; see LICENSE.txt
+ * @license     GNU General Public License version 3 or later; see LICENSE.txt
  */
 
 namespace Cefjdemos\Component\Countrybase\Administrator\Table;
@@ -20,7 +20,7 @@ use Joomla\Database\DatabaseDriver;
 /**
  * Featured Table class.
  *
- * @since  1.6
+ * @since  1.0.0
  */
 class CountriesTable extends Table
 {
@@ -28,8 +28,6 @@ class CountriesTable extends Table
      * Constructor
      *
      * @param   DatabaseDriver  $db  Database connector object
-     *
-     * @since   1.6
      */
     public function __construct(DatabaseDriver $db)
     {

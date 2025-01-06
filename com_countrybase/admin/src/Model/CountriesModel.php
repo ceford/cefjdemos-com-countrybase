@@ -5,14 +5,15 @@
  * @subpackage  com_countrybase
  *
  * @copyright   (C) 2025 Clifford E Ford
- * @license     GNU General Public License version 2 or later; see LICENSE.txt
+ * @license     GNU General Public License version 3 or later; see LICENSE.txt
  */
 
 namespace Cefjdemos\Component\Countrybase\Administrator\Model;
 
-defined('_JEXEC') or die;
+// phpcs:disable PSR1.Files.SideEffects
+\defined('_JEXEC') or die;
+// phpcs:enable PSR1.Files.SideEffects
 
-use Joomla\CMS\Component\ComponentHelper;
 use Joomla\CMS\Factory;
 use Joomla\CMS\MVC\Model\ListModel;
 use Joomla\Database\ParameterType;
@@ -20,7 +21,7 @@ use Joomla\Database\ParameterType;
 /**
  * Methods to handle a list of records.
  *
- * @since  1.6
+ * @since  1.0.0
  */
 class CountriesModel extends ListModel
 {
@@ -28,14 +29,10 @@ class CountriesModel extends ListModel
      * Constructor.
      *
      * @param   array  $config  An optional associative array of configuration settings.
-     *
-     * @see     \JController
-     * @since   1.6
      */
     public function __construct($config = array())
     {
-        if (empty($config['filter_fields']))
-        {
+        if (empty($config['filter_fields'])) {
             $config['filter_fields'] = array(
                     'id', 'a.id',
                     'title', 'a.title',
@@ -66,8 +63,6 @@ class CountriesModel extends ListModel
      * @param   string  $direction  An optional direction (asc|desc).
      *
      * @return  void
-     *
-     * @since   3.0.1
      */
     protected function populateState($ordering = 'title', $direction = 'ASC')
     {
@@ -97,8 +92,6 @@ class CountriesModel extends ListModel
      * @param   string  $id  A prefix for the store id.
      *
      * @return  string  A store id.
-     *
-     * @since   1.6
      */
     protected function getStoreId($id = '')
     {
@@ -115,8 +108,6 @@ class CountriesModel extends ListModel
      * Get the master query for retrieving a list of countries subject to the model state.
      *
      * @return  \Joomla\Database\DatabaseQuery
-     *
-     * @since   1.6
      */
     protected function getListQuery()
     {
@@ -126,9 +117,9 @@ class CountriesModel extends ListModel
 
         // Select the required fields from the table.
         $query->select(
-                $this->getState(
-                        'list.select',
-                        [
+            $this->getState(
+                'list.select',
+                [
                                 $db->quoteName('a.id'),
                                 $db->quoteName('a.title'),
                                 $db->quoteName('a.iso_2'),
@@ -142,27 +133,25 @@ class CountriesModel extends ListModel
                                 $db->quoteName('b.title') . ' AS currency_title',
                                 $db->quoteName('b.dollar_exchange_rate'),
                         ]
-                        )
-                )
+            )
+        )
                 ->from($db->quoteName('#__countrybase_countries', 'a'))
                 ->leftjoin($db->quoteName('#__countrybase_currencies', 'b') . 'ON a.currency_code = b.currency_code');
 
         // Filter by search in title.
         $search = $this->getState('filter.search');
 
-        if (!empty($search))
-        {
-            $search = $db->quote('%' . str_replace(' ', '%', $db->escape(trim($search), true) . '%'));
-            $query->where('(a.title LIKE ' . $search . ')');
+        if (!empty($search)) {
+            $search = '%' . str_replace(' ', '%', trim($search) . '%');
+            $query->where($db->quoteName('a.title') . ' LIKE :search')
+            ->bind(':search', $search, ParameterType::STRING);
         }
 
         // Filter by published state
         $published = (string) $this->getState('filter.published');
 
-        if ($published !== '*')
-        {
-            if (is_numeric($published))
-            {
+        if ($published !== '*') {
+            if (is_numeric($published)) {
                 $state = (int) $published;
                 $query->where($db->quoteName('a.state') . ' = :state')
                 ->bind(':state', $state, ParameterType::INTEGER);

@@ -5,16 +5,16 @@
  * @subpackage  com_countrybase
  *
  * @copyright   (C) 2025 Clifford E Ford
- * @license     GNU General Public License version 2 or later; see LICENSE.txt
+ * @license     GNU General Public License version 3 or later; see LICENSE.txt
  */
 
-defined('_JEXEC') or die;
+// phpcs:disable PSR1.Files.SideEffects
+\defined('_JEXEC') or die;
+// phpcs:enable PSR1.Files.SideEffects
 
 use Joomla\CMS\Component\Router\RouterFactoryInterface;
 use Joomla\CMS\Dispatcher\ComponentDispatcherFactoryInterface;
 use Joomla\CMS\Extension\ComponentInterface;
-use Joomla\CMS\Extension\MVCComponent;
-use Joomla\CMS\Extension\Service\Provider\CategoryFactory;
 use Joomla\CMS\Extension\Service\Provider\ComponentDispatcherFactory;
 use Joomla\CMS\Extension\Service\Provider\MVCFactory;
 use Joomla\CMS\Extension\Service\Provider\RouterFactory;
@@ -26,7 +26,7 @@ use Cefjdemos\Component\Countrybase\Administrator\Extension\CountrybaseComponent
 /**
  * The Countrybase service provider.
  *
- * @since  4.0.0
+ * @since  1.0.0
  */
 return new class implements ServiceProviderInterface
 {
@@ -36,12 +36,9 @@ return new class implements ServiceProviderInterface
      * @param   Container  $container  The DI container.
      *
      * @return  void
-     *
-     * @since   4.0.0
      */
     public function register(Container $container)
     {
-        $container->registerServiceProvider(new CategoryFactory('\\Cefjdemos\\Component\\Countrybase'));
         $container->registerServiceProvider(new MVCFactory('\\Cefjdemos\\Component\\Countrybase'));
         $container->registerServiceProvider(new ComponentDispatcherFactory('\\Cefjdemos\\Component\\Countrybase'));
         $container->registerServiceProvider(new RouterFactory('\\Cefjdemos\\Component\\Countrybase'));
